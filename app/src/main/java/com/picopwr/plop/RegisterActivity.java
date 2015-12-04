@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.picopwr.plop.db.DatabaseHelper;
 import com.picopwr.plop.model.User;
 
 import org.json.JSONObject;
@@ -27,6 +28,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "RegisterActivity"; // For logcat
     private String url = "http://cssgate.insttech.washington.edu/~dhuynh88/Android/addUser.php";
+
+    DatabaseHelper mDBHelper = new DatabaseHelper(this);
 
 
     private EditText mEditName;

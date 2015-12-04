@@ -13,6 +13,9 @@ package com.picopwr.plop.model;
  */
 public class User {
 
+
+    // userID
+    int mId;
     // Name of the user
     String mName;
     // Email of the user (used as unique identifier)
