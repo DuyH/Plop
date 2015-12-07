@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tabs">
+        <item>date</item>
+        <item>time</item>
+        <item>type</item>
+        <item>amount</item>
+        <item>color</item>
+        <item>note</item>
+        <item>photo</item>
+    </string-array>
+
+    <array name="stool_colors_hex">
+        <item>#000000</item>
+        <item>#4caf50</item>
+        <item>#795548</item>
+        <item>#f44336</item>
+        <item>#ffffff</item>
+        <item>#ffeb3b</item>
+    </array>
+
+    <string-array name="stool_colors_hex_string">
+        <item>#000000</item>
+        <item>#4caf50</item>
+        <item>#795548</item>
+        <item>#f44336</item>
+        <item>#ffffff</item>
+        <item>#ffeb3b</item>
+    </string-array>
+
+    <string-array name="stool_colors">
+        <item>Black</item>
+        <item>Green</item>
+        <item>Brown</item>
+        <item>Red</item>
+        <item>White</item>
+        <item>Yellow</item>
+    </string-array>
+
+    <string-array
+        name="bristol_scale">
+        <item>Type 1</item>
+        <item>Type 2</item>
+        <item>Type 3</item>
+        <item>Type 4</item>
+        <item>Type 5</item>
+        <item>Type 6</item>
+        <item>Type 7</item>
+    </string-array>
+
+    <string-array
+        name="bristol_descriptions">
+        <item>Separate hard lumps, like nuts (hard to pass)</item>
+        <item>Sausage-shaped but lumpy</item>
+        <item>Like a sausage but with cracks on the surface</item>
+        <item>Like a sausage or snake, smooth and soft</item>
+        <item>Soft blobs with clear-cut edges</item>
+        <item>Fluffy pieces with ragged edges, mushy stool</item>
+        <item>Watery, no solid pieces. Entirely liquid.</item>
+    </string-array>
+
+    <string-array
+        name="bristol_scale_and_descriptions">
+        <item>Type 1: Separate hard lumps, like nuts (hard to pass)</item>
+        <item>Type 2: Sausage-shaped but lumpy</item>
+        <item>Type 3: Like a sausage but with cracks on the surface</item>
+        <item>Type 4: Like a sausage or snake, smooth and soft</item>
+        <item>Type 5: Soft blobs with clear-cut edges</item>
+        <item>Type 6: Fluffy pieces with ragged edges, mushy stool</item>
+        <item>Type 7: Watery, no solid pieces. Entirely liquid.</item>
+    </string-array>
+
+
+
+    <string-array
+        name="amount">
+        <item>light</item>
+        <item>average</item>
+        <item>massive</item>
+    </string-array>
+
+    <string-array
+        name="difficulty">
+        <item>Difficult</item>
+        <item>Alright</item>
+        <item>Easy</item>
+    </string-array>
+
+</resources>

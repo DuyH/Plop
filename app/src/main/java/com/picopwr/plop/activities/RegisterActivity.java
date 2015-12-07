@@ -1,6 +1,8 @@
-package com.picopwr.plop;
+package com.picopwr.plop.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.picopwr.plop.R;
 import com.picopwr.plop.db.DatabaseHelper;
 import com.picopwr.plop.model.User;
 
@@ -95,8 +98,33 @@ public class RegisterActivity extends AppCompatActivity {
             // Create user from
             User user = new User(name, email, password);
 
-            url += "?email=" + email + "&password=" + password;
-            new AddUserWebTask().execute(url);
+            // Disabling the following two lines 12/3 to use sqlite db for users instead
+//            url += "?email=" + email + "&password=" + password;
+//            new AddUserWebTask().execute(url);
+
+            // Register new user into db
+            if (!mDBHelper.emailExists(user.getEmail())) {
+
+                // Insert user into database
+                mDBHelper.insertUser(user);
+
+                // Save user's email into shared preference for this session
+                SharedPreferences sharedPrefs = getSharedPreferences("com.picopwr.plop.PREFS", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putString("email", email);
+                editor.commit();
+
+                // Proceed to finish off registration:
+                onRegistrationSuccess();
+
+            } else {
+
+                // Failed to reg bc of duplicate email in db:
+                onDuplicateEmail();
+            }
+
+
+
         }
     }
 
@@ -111,6 +139,12 @@ public class RegisterActivity extends AppCompatActivity {
     public void onRegistrationFailed() {
         progressDialog.dismiss();
         Toast.makeText(this, "There was an error in registration", Toast.LENGTH_SHORT).show();
+        mRegisterButton.setEnabled(true);
+    }
+
+    public void onDuplicateEmail() {
+        progressDialog.dismiss();
+        Toast.makeText(this, "That email address is already in use", Toast.LENGTH_SHORT).show();
         mRegisterButton.setEnabled(true);
     }
 
@@ -166,8 +200,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Given a URL, establishes an HttpUrlConnection and retrieves
-// the web page content as a InputStream, which it returns as
-// a string.
+        // the web page content as a InputStream, which it returns as
+        // a string.
         private String downloadUrl(String myurl) throws IOException {
             InputStream is = null;
             // Only display the first 500 characters of the retrieved

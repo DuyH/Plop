@@ -10,7 +10,7 @@ android {
         }
     }
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.1'
     defaultConfig {
         applicationId "com.picopwr.plop"
         minSdkVersion 15
@@ -33,10 +33,22 @@ repositories { mavenCentral() }
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1' // Allows use of support design
-    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
-
+    // Android support libraries
+    //For view/context injection ie @OnClick
+    // Material date & time picker
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.2@aar') {
+        transitive = true
+    }
+    compile('com.github.afollestad.material-dialogs:commons:0.8.5.2@aar') {
+        transitive = true
+    }
+    // For nice tabbed sliding pages in logging
+    // Unit testing dependencies
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.wdullaer:materialdatetimepicker:2.0.2'
+    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    androidTestCompile fileTree(dir: 'libs', include: 'robotium-solo-5.5.2.jar')
 }

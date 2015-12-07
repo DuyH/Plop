@@ -1,5 +1,47 @@
 <resources>
     <string name="app_name">Plop</string>
-    <string name="title_activity_register">Register</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_log">LogActivity</string>
+    <string name="title_activity_slidinglog">SlidingLogActivity</string>
+
+
+    <!-- Logged in already shared pref?-->
+    <string name="SHARED_PREFS">com.picopwr.plop.PREFS</string>
+    <string name="LOGGEDIN">loggedin</string>
+
+    <string-array
+        name="random_facts">
+        <item>The Parrot fish eats coral and poops sand. This has led to creation for many small islands and beaches of the Caribbean.</item>
+        <item>There are four bags of astronaut poop on the moon, left behind by Neil Armstrong on his Apollo mission to moon</item>
+        <item>Sloths only poop once a week. Remember to eat your fiber!</item>
+        <item>The smell of books makes some people need to poop. It\'s the Mariko Aoki phenomenon</item>
+        <item>Wombats have cube shaped poop, which they use to remember where they live.</item>
+        <item>Pandas can poop up to 48 pounds per day.</item>
+        <item>All the poop generated on the US Navy’s newest Gerald R. Ford-class aircraft carrier will be vaporized by plasma.</item>
+        <item>Some of the shooting stars we see are actually astronaut poop burning up in the atmosphere.</item>
+        <item>Dubai has no sewer system. Instead they use poop trucks to haul the entire cities’ excrement away. </item>
+        <item>Penguin poop stains can be seen from space.</item>
+        <item>Poop is brown because of the breakdown of red blood cells in the intestines.</item>
+        <item>Civet coffee is $600 per pound. It?s made from excreted coffee beans of the civet, a weasel like creature.</item>
+        <item>The average human poops 2 lbs a day. A panda, 48 lbs. An elephant, 80 lbs.</item>
+        <item>Caterpillars can fling their poop 3 feet at predators.</item>
+        <item>The longest poop recorded was 25 feet.</item>
+        <item>In WWII, German tank drivers through it was good luck to drive over camel dung?so the British made explosives that looked like camel dung.</item>
+        <item>Rabbits can poop 500 pellets a day.</item>
+        <item>A third of your poop is dead bacteria.</item>
+        <item>75% of your poop is water.</item>
+    </string-array>
+
+
+    <string name="dialogColor">What was the color?</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chooseDate">Choose Date</string>
+    <string name="chooseTime">Choose Time</string>
+    <string name="title_activity_view">ViewActivity</string>
+
+
 </resources>

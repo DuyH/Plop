@@ -1,9 +1,15 @@
-package com.picopwr.plop;
+package com.picopwr.plop.activities;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,9 +17,12 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.picopwr.plop.R;
+import com.picopwr.plop.db.DatabaseHelper;
 import com.picopwr.plop.model.User;
 import com.picopwr.plop.utility.JSONParser;
 
@@ -21,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Login activity handles user login. It is the first screen user will see.
@@ -30,16 +40,67 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity"; // For logcat
     private static final int REQUEST_CODE_REGISTER = 0; // activities, see BNR pg 102
 
+    private DatabaseHelper mDBHelper = new DatabaseHelper(this);
 
     private EditText mEditEmail;
     private EditText mEditPassword;
     private Button mLoginButton;
+    private ImageView mPlopLogo;
+
+    // Sound effects:
+    private SoundPool mSoundPool;
+    private boolean mSoundsLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Setup SoundPool according to SDK version
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            Log.d(TAG, "USING NEW SOUND POOL");
+            createNewSoundPool();
+        } else {
+            Log.d(TAG, "USING OLD SOUND POOL");
+            createOldSoundPool();
+        }
+
+        // Load all sound effects (context, id from res/raw, priority - currently has no effect so use 1)
+        mSoundPool.load(this, R.raw.fart01, 1);
+        mSoundPool.load(this, R.raw.fart02, 1);
+        mSoundPool.load(this, R.raw.fart03, 1);
+        mSoundPool.load(this, R.raw.fart04, 1);
+        mSoundPool.load(this, R.raw.fart05, 1);
+        mSoundPool.load(this, R.raw.fart06, 1);
+        mSoundPool.load(this, R.raw.fart07, 1);
+        mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                mSoundsLoaded = true;
+            }
+        });
+
+        // Create the music player for the sfx
+        // final MediaPlayer mp = new MediaPlayer(); // Too resource intensive so use SoundPool
+
+        // Make the Plop logo have sfx
+        mPlopLogo = (ImageView) findViewById(R.id.plop_logo);
+        mPlopLogo.setSoundEffectsEnabled(false);
+        mPlopLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                playRandomSound();
+            }
+            private void playRandomSound() {
+                Log.d(TAG, "PLAYING RANDOM SOUND");
+                int sound = (new Random().nextInt(7) + 1);
+                mSoundPool.play(sound, 1, 1, 1, 0, 1);
+            }
+
+        });
+
+
+        // Initialize the email and password edit text fields:
         mEditEmail = (EditText) findViewById(R.id.edit_email);
         mEditPassword = (EditText) findViewById(R.id.edit_password);
 
@@ -70,6 +131,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    protected void createNewSoundPool() {
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        mSoundPool = new SoundPool.Builder()
+                .setAudioAttributes(attributes)
+                .build();
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void createOldSoundPool() {
+        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+    }
 
     // This is called when being passed back to this activity from another
     @Override
@@ -83,8 +159,17 @@ public class LoginActivity extends AppCompatActivity {
                 // Login with the data and finish this activity?
                 Toast.makeText(this, "User account created!", Toast.LENGTH_SHORT).show();
 
+                // Consider making pretty splash welcome screen pages for first time users
+                // Intent i = new Intent(LoginActivity.this, WelcomeSplash.class);
+
                 // Should take user to main screen, loggedin
                 // [ Bundle the data from RegisterActivty when it returned ]
+
+                // Update shared pref to reflect user logged in:
+                SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.SHARED_PREFS), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPrefs.edit();
+                editor.putBoolean(getString(R.string.LOGGEDIN), false);
+                editor.commit();
 
                 // But for now, just create a new intent to the main activity
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
@@ -118,12 +203,30 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Authentic user credentials:
-        authenticate(new User(email, password));
+        authenticate(email, password);
     }
 
-    // Pass credentials along, attempt a login
+    // Pass credentials along, attempt a login (web version)
     public void authenticate(User user) {
         new LoginAsyncTask().execute(user.getEmail(), user.getPassword());
+    }
+
+    // Authenticate using password in local database
+    public void authenticate(String email, String password) {
+        String dbPassword = mDBHelper.searchPass(email);
+        Log.d(TAG, dbPassword);
+        if (password.equals(dbPassword)) {
+
+            // Store the user's email address in shared preferences
+            SharedPreferences sharedPrefs = getSharedPreferences("com.picopwr.plop.PREFS", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPrefs.edit();
+            editor.putString("email", email);
+            editor.commit();
+            onLoginSuccess();
+        } else {
+            onLoginFail();
+        }
+
     }
 
 
@@ -131,8 +234,11 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(TAG, "Successful login");
         mLoginButton.setEnabled(true); // Reset login button
 
-        // Store user data:
-        // [ Use shared prefs to store user for this session and pass as a bundle ]
+        // Update shared pref to reflect user logged in:
+        SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.SHARED_PREFS), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putBoolean(getString(R.string.LOGGEDIN), true);
+        editor.commit();
 
         // Navigate to the Main Activity screen:
         Intent i = new Intent(LoginActivity.this, MainActivity.class);

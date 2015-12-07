@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            android:weightSum="1"
+            tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brown_500"
+        android:orientation="vertical"
+        >
+
+        <!-- Plop Logo-->
+        <ImageView
+            android:id="@+id/plop_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/plop_logo"/>
+
+        <TextView
+            android:id="@+id/textFunny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="10dp"
+            android:text="Please wash your hands before logging..."
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/colorPee"/>
+
+        <Button
+            android:id="@+id/buttonDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/chooseDate"/>
+
+        <TextView
+            android:id="@+id/textDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Date not selected yet!"
+            />
+
+        <Button
+            android:id="@+id/buttonTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/chooseTime"/>
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Time not selected yet!"/>
+
+        <Button
+            android:id="@+id/buttonBristol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Choose Bristol Type"/>
+
+        <TextView
+            android:id="@+id/textBristolType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Bristol Type not selected yet!"/>
+
+        <Button
+            android:id="@+id/buttonAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Amount"/>
+
+        <TextView
+            android:id="@+id/textAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Amount not selected yet!"/>
+
+        <Button
+            android:id="@+id/buttonColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stool Color"/>
+
+        <TextView
+            android:id="@+id/textColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Color not selected yet!"/>
+
+        <Button
+            android:id="@+id/buttonDifficulty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Difficulty"/>
+
+        <TextView
+            android:id="@+id/textDifficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Difficulty not selected yet!"/>
+
+        <Button
+            android:id="@+id/buttonNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Add Notes"/>
+
+        <TextView
+            android:id="@+id/textNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="You haven&apos;t added a note yet!"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:id="@+id/buttonCancel"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit!"
+                android:id="@+id/buttonSubmit"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

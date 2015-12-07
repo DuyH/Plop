@@ -3,4 +3,22 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorToiletPaper">#feffff</color>
+    <color name="colorToiletWater">#98dafc</color>
+    <color name="colorPoo">#daad86</color>
+    <color name="colorAlmostBlack">#312c32</color>
+    <color name="colorPee">#ffd54f</color>
+
+    <!-- Material Design Browns-->
+    <color name="brown_50">#EFEBE9</color>
+    <color name="brown_100">#D7CCC8</color>
+    <color name="brown_200">#BCAAA4</color>
+    <color name="brown_300">#A1887F</color>
+    <color name="brown_400">#8D6E63</color>
+    <color name="brown_500">#795548</color>
+    <color name="brown_600">#6D4C41</color>
+    <color name="brown_700">#5D4037</color>
+    <color name="brown_800">#4E342E</color>
+    <color name="brown_900">#3E2723</color>
+    <!-- Brown -->
 </resources>

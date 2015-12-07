@@ -1,28 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context="com.picopwr.plop.MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/brown_500"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+              android:weightSum="1"
+              tools:context=".activities.MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/mainLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello: " />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/plop_logo"
+        />
 
-    <TextView
-        android:id="@+id/text_name"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/button_log"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
-        android:text="NAME" />
+        android:layout_gravity="center_horizontal"
+        android:text="Create Log"
+        android:layout_weight="0.22"/>
+
+    <Button
+        android:id="@+id/button_view"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="View Logs"
+        android:layout_weight="0.22"/>
+    <Button
+        android:id="@+id/button_send"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Share logs"
+        android:layout_weight="0.22"/>
 
     <Button
         android:id="@+id/button_logout"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Log...out"
+        android:layout_weight="0.22"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Logout" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Did you know?..."
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/brown_50"/>
+
+    <TextView
+        android:layout_width="313dp"
+        android:layout_height="82dp"
+        android:text="Random Fact!"
+        android:id="@+id/text_fact"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.34"
+        android:textAlignment="center"
+        android:textColor="@color/brown_50"/>
 
 </LinearLayout>
